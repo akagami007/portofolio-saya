@@ -1,4 +1,5 @@
 import Hero3D from "@/components/Hero3D";
+import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   return (
@@ -133,25 +134,7 @@ export default function Home() {
           </p>
         </div>
         
-        <form className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
-              <input type="text" id="name" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="John Doe" />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-300">Email</label>
-              <input type="email" id="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="john@example.com" />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
-            <textarea id="message" rows={5} className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Tell me about your project..."></textarea>
-          </div>
-          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 rounded-lg transition-colors">
-            Send Message
-          </button>
-        </form>
+        <ContactForm />
       </section>
       
       {/* Footer */}
