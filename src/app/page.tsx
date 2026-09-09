@@ -1,5 +1,6 @@
 import Hero3D from "@/components/Hero3D";
 import ContactForm from "@/components/ContactForm";
+import ProjectCarousel3D from "@/components/ProjectCarousel3D";
 
 export default function Home() {
   return (
@@ -83,44 +84,19 @@ export default function Home() {
       </section>
 
       {/* Case Studies Section */}
-      <section id="case-studies" className="w-full bg-black/50 py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">Case Studies</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            
-            <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 hover:border-blue-500/50 transition-colors">
-              <div className="h-48 bg-gradient-to-br from-blue-900/40 to-purple-900/40 rounded-xl mb-6 flex items-center justify-center">
-                <span className="text-gray-500 font-mono">&lt;Architecture Diagram /&gt;</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Scalable E-Commerce Backend</h3>
-              <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-                Designed and implemented a microservices architecture handling 10k+ concurrent users. 
-                Utilized Next.js for the storefront and Node.js/PostgreSQL for the backend.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Next.js</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">PostgreSQL</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Redis</span>
-              </div>
-            </div>
-
-            <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 hover:border-green-500/50 transition-colors">
-              <div className="h-48 bg-gradient-to-br from-green-900/40 to-emerald-900/40 rounded-xl mb-6 flex items-center justify-center">
-                <span className="text-gray-500 font-mono">&lt;Test Coverage Report /&gt;</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Automated QA Pipeline</h3>
-              <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-                Built a comprehensive End-to-End testing suite using Playwright for a SaaS platform. 
-                Reduced manual testing time by 90% and caught critical regression bugs before production.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Playwright</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">CI/CD</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">TypeScript</span>
-              </div>
-            </div>
-
+      <section id="case-studies" className="w-full bg-black/50 py-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-4 text-center">Project Gallery</h2>
+          <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+            A showcase of my recent work across Fullstack Development and Quality Assurance. 
+            Swipe or drag to explore the projects in 3D space.
+          </p>
+          
+          {/* 3D Carousel Display */}
+          <div className="w-full rounded-2xl overflow-hidden border border-white/10 bg-black/30 backdrop-blur-sm">
+            <ProjectCarousel3D />
           </div>
+
         </div>
       </section>
 
