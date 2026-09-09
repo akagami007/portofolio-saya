@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text, OrbitControls, Image } from "@react-three/drei";
 import * as THREE from "three";
@@ -79,20 +79,22 @@ export default function ProjectCarousel3D() {
   return (
     <div className="w-full h-[600px] cursor-grab active:cursor-grabbing relative">
       <Canvas camera={{ position: [0, 1, 7], fov: 50 }}>
-        <ambientLight intensity={0.7} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#blue" />
-        
-        <Carousel />
-        
-        <OrbitControls 
-          enableZoom={false} 
-          enablePan={false} 
-          enableDamping 
-          dampingFactor={0.05}
-          maxPolarAngle={Math.PI / 2 + 0.1}
-          minPolarAngle={Math.PI / 2 - 0.1}
-        />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.7} />
+          <pointLight position={[10, 10, 10]} intensity={1.5} />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#blue" />
+          
+          <Carousel />
+          
+          <OrbitControls 
+            enableZoom={false} 
+            enablePan={false} 
+            enableDamping 
+            dampingFactor={0.05}
+            maxPolarAngle={Math.PI / 2 + 0.1}
+            minPolarAngle={Math.PI / 2 - 0.1}
+          />
+        </Suspense>
       </Canvas>
       <div className="absolute bottom-4 left-0 right-0 text-center text-gray-400 text-sm pointer-events-none">
         ← Drag to rotate gallery →
