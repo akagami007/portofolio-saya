@@ -52,7 +52,6 @@ function Carousel() {
               anchorY="middle"
               textAlign="center"
               maxWidth={3}
-              font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
             >
               {project.title}
             </Text>
@@ -64,7 +63,6 @@ function Carousel() {
               anchorY="middle"
               textAlign="center"
               maxWidth={3}
-              font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
             >
               {project.desc}
             </Text>
@@ -75,11 +73,20 @@ function Carousel() {
   );
 }
 
+function Loader() {
+  return (
+    <mesh>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshBasicMaterial color="#ffffff" wireframe />
+    </mesh>
+  );
+}
+
 export default function ProjectCarousel3D() {
   return (
     <div className="w-full h-[600px] cursor-grab active:cursor-grabbing relative">
       <Canvas camera={{ position: [0, 1, 7], fov: 50 }}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <ambientLight intensity={0.7} />
           <pointLight position={[10, 10, 10]} intensity={1.5} />
           <pointLight position={[-10, -10, -10]} intensity={0.5} color="#blue" />
