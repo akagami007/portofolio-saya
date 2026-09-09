@@ -2,16 +2,16 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, OrbitControls } from "@react-three/drei";
+import { Text, OrbitControls, Image } from "@react-three/drei";
 import * as THREE from "three";
 
 const projects = [
-  { id: 1, title: "E-Commerce\nPlatform", color: "#1e3a8a", desc: "Next.js & Stripe" },
-  { id: 2, title: "QA Automation\nSuite", color: "#064e3b", desc: "Playwright" },
-  { id: 3, title: "Realtime\nChat App", color: "#4c1d95", desc: "Socket.io" },
-  { id: 4, title: "DevOps\nDashboard", color: "#78350f", desc: "Docker & K8s" },
-  { id: 5, title: "Fintech\nMobile App", color: "#831843", desc: "React Native" },
-  { id: 6, title: "AI Image\nGenerator", color: "#083344", desc: "OpenAI API" },
+  { id: 1, title: "E-Commerce", desc: "Next.js & Stripe", image: "/projects/1.jpg" },
+  { id: 2, title: "QA Automation", desc: "Playwright", image: "/projects/2.jpg" },
+  { id: 3, title: "Chat App", desc: "Socket.io", image: "/projects/3.jpg" },
+  { id: 4, title: "DevOps", desc: "Docker & K8s", image: "/projects/4.jpg" },
+  { id: 5, title: "Fintech App", desc: "React Native", image: "/projects/5.jpg" },
+  { id: 6, title: "AI Generator", desc: "OpenAI API", image: "/projects/6.jpg" },
 ];
 
 function Carousel() {
@@ -33,35 +33,37 @@ function Carousel() {
 
         return (
           <group key={project.id} position={[x, 0, z]} rotation={[0, angle, 0]}>
-            <mesh>
-              <planeGeometry args={[2, 2.5]} />
-              <meshStandardMaterial 
-                color={project.color} 
-                side={THREE.DoubleSide} 
-                roughness={0.2} 
-                metalness={0.5} 
-              />
+            <Image
+              url={project.image}
+              transparent
+              opacity={0.9}
+              scale={[3.2, 1.8]} // 16:9 aspect ratio
+            />
+            {/* Dark overlay for text readability */}
+            <mesh position={[0, -0.6, 0.01]}>
+              <planeGeometry args={[3.2, 0.6]} />
+              <meshBasicMaterial color="#000000" transparent opacity={0.6} />
             </mesh>
             <Text
-              position={[0, 0.4, 0.01]}
-              fontSize={0.25}
+              position={[0, -0.5, 0.02]}
+              fontSize={0.2}
               color="white"
               anchorX="center"
               anchorY="middle"
               textAlign="center"
-              maxWidth={1.8}
+              maxWidth={3}
               font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
             >
               {project.title}
             </Text>
             <Text
-              position={[0, -0.4, 0.01]}
-              fontSize={0.15}
-              color="#cbd5e1"
+              position={[0, -0.75, 0.02]}
+              fontSize={0.12}
+              color="#94a3b8"
               anchorX="center"
               anchorY="middle"
               textAlign="center"
-              maxWidth={1.8}
+              maxWidth={3}
               font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
             >
               {project.desc}
