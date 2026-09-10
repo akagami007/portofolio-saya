@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akagami | Fullstack & QA Engineer",
-  description: "Portfolio of Akagami, showcasing Fullstack Development and Quality Assurance skills.",
+  title: "Stefan | Fullstack & QA Engineer",
+  description: "Portfolio of Stefan, showcasing Fullstack Development and Quality Assurance skills.",
 };
 
 export default function RootLayout({

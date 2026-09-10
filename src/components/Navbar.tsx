@@ -7,7 +7,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="text-white font-bold text-xl tracking-tighter">
-              Aka<span className="text-blue-500">gami</span>
+              Ste<span className="text-blue-500">fan</span>
             </Link>
           </div>
           <div className="hidden md:block">

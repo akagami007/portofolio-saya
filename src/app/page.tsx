@@ -14,7 +14,7 @@ export default function Home() {
         
         <div className="z-10 flex flex-col items-center justify-center h-full text-center px-4 mt-20 pointer-events-none">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 drop-shadow-lg">
-            Hi, I'm <span className="text-blue-500">Akagami</span>
+            Hi, I'm <span className="text-blue-500">Stefan Cornelius</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-2xl drop-shadow-md">
             Fullstack Developer & Quality Assurance Engineer
