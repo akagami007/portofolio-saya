@@ -21,7 +21,7 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
   // Source: https://github.com/pmndrs/drei#usecursor
   useCursor(hovered, 'pointer', 'auto');
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
 
     const t = state.clock.getElapsedTime();
@@ -30,15 +30,16 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
     const targetRotationX = hovered ? -0.1 : Math.cos(t * 0.3 + index) * 0.2;
     const targetScale = hovered ? 1.2 : 1.0;
 
-    // Mutating refs directly inside useFrame avoids triggering expensive React re-renders.
-    // Source: https://r3f.docs.pmnd.rs/api/hooks#useframe
-    // We use Three.js built-in lerp for smooth, framerate-independent transitions.
-    // Source: https://threejs.org/docs/#api/en/math/MathUtils.lerp
-    meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, 0.1);
-    meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, 0.1);
+    // Use damp (or frame-rate independent lerp) for smooth transitions across all refresh rates
+    // 5.0 and 8.0 are the spring lambda values (speed of damping)
+    const lerpFactorRot = 1 - Math.exp(-5.0 * delta);
+    const lerpFactorScale = 1 - Math.exp(-8.0 * delta);
+
+    meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, lerpFactorRot);
+    meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, lerpFactorRot);
 
     const currentScale = meshRef.current.scale.x;
-    const newScale = THREE.MathUtils.lerp(currentScale, targetScale, 0.15);
+    const newScale = THREE.MathUtils.lerp(currentScale, targetScale, lerpFactorScale);
     meshRef.current.scale.set(newScale, newScale, newScale);
   });
 

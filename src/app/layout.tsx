@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +21,10 @@ const geistMono = Geist_Mono({
 if (typeof window !== "undefined") {
   const originalError = console.error;
   console.error = (...args) => {
-    if (typeof args[0] === "string" && args[0].includes("Can't perform a React state update on a component that hasn't mounted yet")) {
+    if (typeof args[0] === "string" && (
+      args[0].includes("Can't perform a React state update on a component that hasn't mounted yet") ||
+      args[0].includes("Encountered a script tag while rendering React component")
+    )) {
       return;
     }
     originalError(...args);
@@ -43,6 +48,8 @@ export default function RootLayout({
           <LanguageProvider>
             <Navbar />
             {children}
+            <Analytics />
+            <SpeedInsights />
           </LanguageProvider>
         </ThemeProvider>
       </body>

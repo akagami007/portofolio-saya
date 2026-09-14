@@ -1,10 +1,13 @@
 "use client";
 
-import Hero3D from "@/components/Hero3D";
+import dynamic from "next/dynamic";
 import ContactForm from "@/components/ContactForm";
-import ProjectCarousel3D from "@/components/ProjectCarousel3D";
-import SocialLinks3D from "@/components/SocialLinks3D";
 import { useLanguage } from "@/context/LanguageContext";
+
+// Lazy-load heavy 3D components to avoid blocking the initial HTML payload (improves Web Vitals LCP/FCP)
+const Hero3D = dynamic(() => import("@/components/Hero3D"), { ssr: false });
+const ProjectCarousel3D = dynamic(() => import("@/components/ProjectCarousel3D"), { ssr: false });
+const SocialLinks3D = dynamic(() => import("@/components/SocialLinks3D"), { ssr: false });
 
 export default function Home() {
   const { t } = useLanguage();
