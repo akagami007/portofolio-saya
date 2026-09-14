@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Text, RoundedBox, Environment, ContactShadows } from "@react-three/drei";
+import { Float, Text, RoundedBox, Environment, ContactShadows, useCursor } from "@react-three/drei";
 import * as THREE from "three";
 
 const socials = [
@@ -51,6 +51,9 @@ function SocialIcon({
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  
+  // Clean, declarative cursor management
+  useCursor(hovered, 'pointer', 'auto');
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -84,12 +87,10 @@ function SocialIcon({
           onPointerOver={(e) => {
             e.stopPropagation();
             setHovered(true);
-            document.body.style.cursor = 'pointer';
           }}
           onPointerOut={(e) => {
             e.stopPropagation();
             setHovered(false);
-            document.body.style.cursor = 'auto';
           }}
           onClick={handleClick}
         >
