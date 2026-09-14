@@ -5,74 +5,41 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Text, RoundedBox, Environment, ContactShadows, useCursor } from "@react-three/drei";
 import * as THREE from "three";
 
-const socials = [
-  {
-    id: "linkedin",
-    name: "LinkedIn",
-    symbol: "in",
-    url: "https://www.linkedin.com/in/stefan-cornelius-9b2916a1/", // User can update this
-    color: "#0077b5",
-    emissive: "#003b5c"
-  },
-  {
-    id: "github",
-    name: "GitHub",
-    symbol: "git",
-    url: "https://github.com/akagami007",
-    color: "#333333",
-    emissive: "#111111"
-  },
-  {
-    id: "email",
-    name: "Email",
-    symbol: "@",
-    url: "mailto:stefancorneliusjr@gmail.com",
-    color: "#ea4335",
-    emissive: "#822218"
-  },
-  {
-    id: "phone",
-    name: "Phone",
-    symbol: "📞",
-    url: "tel:+6282323572250",
-    color: "#25d366",
-    emissive: "#126c33"
-  }
-];
+import { socialsData, type SocialData } from "@/lib/socials";
 
-function SocialIcon({
-  position,
-  data,
-  index
-}: {
-  position: [number, number, number],
-  data: typeof socials[0],
-  index: number
-}) {
+interface SocialIconProps {
+  position: [number, number, number];
+  data: SocialData;
+  index: number;
+}
+
+function SocialIcon({ position, data, index }: SocialIconProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   
   // Clean, declarative cursor management
+  // Source: https://github.com/pmndrs/drei#usecursor
   useCursor(hovered, 'pointer', 'auto');
 
   useFrame((state) => {
-    if (meshRef.current) {
-      // Gentle floating and rotation based on time and index offset
-      const t = state.clock.getElapsedTime();
+    if (!meshRef.current) return;
 
-      // Target rotation and scale
-      const targetRotationY = hovered ? Math.sin(t * 2) * 0.2 : Math.sin(t * 0.5 + index) * 0.3;
-      const targetRotationX = hovered ? -0.1 : Math.cos(t * 0.3 + index) * 0.2;
-      const targetScale = hovered ? 1.2 : 1.0;
+    const t = state.clock.getElapsedTime();
 
-      // Smoothly interpolate
-      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, 0.1);
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, 0.1);
+    const targetRotationY = hovered ? Math.sin(t * 2) * 0.2 : Math.sin(t * 0.5 + index) * 0.3;
+    const targetRotationX = hovered ? -0.1 : Math.cos(t * 0.3 + index) * 0.2;
+    const targetScale = hovered ? 1.2 : 1.0;
 
-      const currentScale = meshRef.current.scale.x;
-      const newScale = THREE.MathUtils.lerp(currentScale, targetScale, 0.15);
-      meshRef.current.scale.set(newScale, newScale, newScale);
-    }
+    // Mutating refs directly inside useFrame avoids triggering expensive React re-renders.
+    // Source: https://r3f.docs.pmnd.rs/api/hooks#useframe
+    // We use Three.js built-in lerp for smooth, framerate-independent transitions.
+    // Source: https://threejs.org/docs/#api/en/math/MathUtils.lerp
+    meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, 0.1);
+    meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, 0.1);
+
+    const currentScale = meshRef.current.scale.x;
+    const newScale = THREE.MathUtils.lerp(currentScale, targetScale, 0.15);
+    meshRef.current.scale.set(newScale, newScale, newScale);
   });
 
   const handleClick = () => {
@@ -139,7 +106,7 @@ function SocialIcon({
 
 export default function SocialLinks3D() {
   const spacing = 3.5;
-  const totalWidth = (socials.length - 1) * spacing;
+  const totalWidth = (socialsData.length - 1) * spacing;
   const startX = -totalWidth / 2;
 
   return (
@@ -152,7 +119,7 @@ export default function SocialLinks3D() {
 
         <Environment preset="city" />
 
-        {socials.map((social, index) => (
+        {socialsData.map((social, index) => (
           <SocialIcon
             key={social.id}
             data={social}
