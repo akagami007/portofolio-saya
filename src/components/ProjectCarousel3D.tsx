@@ -3,9 +3,19 @@
 import { useRef, useState, useEffect, Suspense } from "react";
 import { createPortal } from "react-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, OrbitControls, Image } from "@react-three/drei";
+import { Text, OrbitControls, Image, useCursor } from "@react-three/drei";
 import * as THREE from "three";
 import { useLanguage } from "@/context/LanguageContext";
+
+export interface Project {
+  id: number;
+  title: string;
+  desc: string;
+  image: string;
+  github: string;
+  longDesc: string;
+  tags: string[];
+}
 
 // Suppress the THREE.Clock deprecation warning which comes from @react-three/fiber
 if (typeof window !== "undefined") {
@@ -18,7 +28,7 @@ if (typeof window !== "undefined") {
   };
 }
 
-const projects = [
+const projects: Project[] = [
   { 
     id: 1, 
     title: "E-Commerce", 
@@ -75,14 +85,19 @@ const projects = [
   },
 ];
 
-function Carousel({ onSelect }: { onSelect: (project: any) => void }) {
+function Carousel({ onSelect }: { onSelect: (project: Project) => void }) {
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
+  const isHoveredRef = useRef(false);
   const radius = 3.5;
 
-  useFrame((state) => {
-    if (groupRef.current && !hovered) {
-      groupRef.current.rotation.y += 0.002; // Auto rotate slowly
+  // Use drei's declarative cursor management
+  useCursor(hovered, 'pointer', 'auto');
+
+  useFrame((state, delta) => {
+    if (groupRef.current && !isHoveredRef.current) {
+      // 0.2 rad/s rotation, normalized to time delta so it runs at the same speed on 60hz vs 144hz monitors
+      groupRef.current.rotation.y += 0.2 * delta;
     }
   });
 
@@ -101,12 +116,12 @@ function Carousel({ onSelect }: { onSelect: (project: any) => void }) {
             onPointerOver={(e) => {
               e.stopPropagation();
               setHovered(true);
-              document.body.style.cursor = "pointer";
+              isHoveredRef.current = true;
             }}
             onPointerOut={(e) => {
               e.stopPropagation();
               setHovered(false);
-              document.body.style.cursor = "auto";
+              isHoveredRef.current = false;
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -152,7 +167,7 @@ function Loader() {
 }
 
 export default function ProjectCarousel3D() {
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [mounted, setMounted] = useState(false);
   const { t } = useLanguage();
 
