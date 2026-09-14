@@ -1,6 +1,7 @@
 import Hero3D from "@/components/Hero3D";
 import ContactForm from "@/components/ContactForm";
 import ProjectCarousel3D from "@/components/ProjectCarousel3D";
+import SocialLinks3D from "@/components/SocialLinks3D";
 
 export default function Home() {
   return (
@@ -113,6 +114,19 @@ export default function Home() {
         <ContactForm />
       </section>
       
+      {/* Social Links 3D Section */}
+      <section id="socials" className="w-full py-16 bg-black/40 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold mb-4">Connect With Me</h2>
+            <p className="text-gray-400">
+              Find me on my social media or reach out directly.
+            </p>
+          </div>
+          <SocialLinks3D />
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="w-full border-t border-white/10 py-8 text-center text-gray-500 text-sm">
         <p>&copy; {new Date().getFullYear()} Akagami. All rights reserved.</p>
