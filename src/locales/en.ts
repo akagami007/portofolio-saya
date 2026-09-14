@@ -1,0 +1,62 @@
+export const en = {
+  hero: {
+    greeting: "Hi, I'm",
+    name: "Stefan Cornelius",
+    role: "Fullstack Developer & Quality Assurance Engineer",
+    description: "I bridge the gap between Fullstack Development and holistic Quality Assurance. I design scalable, innovative application architectures while securing every release through a combination of meticulous manual testing, end-to-end (E2E) automation, and comprehensive test reporting documentation. This unified approach not only accelerates product launch cycles but also provides full transparency to stakeholders, ensuring that every line of code delivers peak performance and a flawless user experience.",
+    viewWork: "View My Work",
+    hireMe: "Hire Me"
+  },
+  about: {
+    title: "About Me",
+    p1: "With a unique dual-focus on both Fullstack Development and Quality Assurance, I don't just write code—I engineer resilient systems. My approach combines the creative problem-solving of frontend/backend development with the meticulous, edge-case-hunting mindset of a QA engineer.",
+    p2: "Whether working with freelance clients to bring their vision to life, or collaborating in a team to build enterprise software, I prioritize maintainability, performance, and bulletproof reliability.",
+    coreCompetencies: "Core Competencies",
+    frontend: "Frontend (React, Next.js, 3D)",
+    backend: "Backend (Node.js, SQL, APIs)",
+    qa: "QA & E2E Testing (Playwright, Cypress)"
+  },
+  projects: {
+    title: "Project Gallery",
+    description: "A showcase of my recent work across Fullstack Development and Quality Assurance. Swipe or drag to explore the projects in 3D space.",
+    dragHint: "← Drag to rotate gallery, Click to view details →",
+    viewRepo: "View Repository",
+    technologies: "Technologies"
+  },
+  socials: {
+    title: "Connect With Me",
+    description: "Find me on my social media or reach out directly."
+  },
+  contact: {
+    title: "Let's Work Together",
+    description: "Have a freelance project in mind or looking for a Fullstack/QA engineer? Let's start a chat below."
+  },
+  chat: {
+    botName: "Stefan (Virtual)",
+    step1: "Hi there! Thanks for visiting my portfolio. What's your name?",
+    step2: "Nice to meet you, {name}! Could I get your email address so I can get back to you later?",
+    invalidEmail: "Hmm, that email format looks a bit off. Could you try typing it again?",
+    step3: "Awesome! Finally, what would you like to chat about? Please select an option below or type your own message.",
+    step4: "Preparing your message for WhatsApp...",
+    success: "Done! WhatsApp should open automatically in a moment. If it doesn't, you can send it manually.",
+    error: "An error occurred. Please try again or contact me via LinkedIn!",
+    inputPlaceholderName: "Type your name...",
+    inputPlaceholderEmail: "Type your email...",
+    inputPlaceholderMessage: "Type your message here...",
+    sendButton: "Send",
+    optionJob: "Job Offer",
+    optionFreelance: "Freelance Project"
+  },
+  footer: {
+    rights: "All rights reserved.",
+    builtWith: "Built with Next.js, Three.js, and Playwright."
+  },
+  nav: {
+    about: "About",
+    skills: "Skills",
+    caseStudies: "Case Studies",
+    contact: "Contact Me"
+  }
+};
+
+export type Dictionary = typeof en;
