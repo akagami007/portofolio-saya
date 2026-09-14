@@ -31,3 +31,20 @@ All 3D components (`Hero3D`, `ProjectCarousel3D`, `SocialLinks3D`) MUST be lazy-
 - **Traffic Analytics**: Powered by `@vercel/analytics/react`.
 - **Web Vitals**: Powered by `@vercel/speed-insights/next`.
 - Both are injected at the root `layout.tsx` level and will automatically activate when deployed to Vercel production environments.
+
+## 4. Engineering Standards (AI Context)
+
+### 4.1 Code Quality & Simplification
+- **Zero "any" Tolerance**: TypeScript `any` is strictly prohibited. Use explicit interfaces (e.g., `Project` interface) to enforce type safety across props and state.
+- **Hook Ordering**: Never place Hooks (`useState`, `useRef`, `useFrame`) inside conditionals. Fast Refresh relies on stable hook ordering.
+
+### 4.2 Frontend UI Engineering
+- **Component Colocation**: Keep components single-responsibility. Extract large sections (like About, Hero, Contact) into isolated files inside `src/components/` to prevent bloated pages.
+- **Glassmorphism & Theming**: Use Tailwind CSS `dark:` prefix consistently. Rely on CSS variables for seamless `next-themes` integration.
+
+### 4.3 Performance Optimization
+- **Render Opt-out**: Avoid React re-renders for purely visual changes. Use `useRef` for animations (Three.js) and `drei` utilities like `useCursor` to decouple visual states from the React lifecycle.
+- **Image Optimization**: If `next/image` is used, always provide width/height or use layout="fill" to prevent layout shifts.
+
+### 4.4 Source-Driven Development
+- Always adhere strictly to official documentations: Next.js App Router docs, React Three Fiber hooks API, and Tailwind CSS v4 patterns. Avoid deprecated APIs (e.g., direct instantiation of `THREE.Clock` inside components).
