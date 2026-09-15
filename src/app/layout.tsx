@@ -19,16 +19,20 @@ const geistMono = Geist_Mono({
 
 // Suppress known React 19 / Third-party library hydration warnings in the console
 if (typeof window !== "undefined") {
-  const originalError = console.error;
-  console.error = (...args) => {
-    if (typeof args[0] === "string" && (
-      args[0].includes("Can't perform a React state update on a component that hasn't mounted yet") ||
-      args[0].includes("Encountered a script tag while rendering React component")
-    )) {
-      return;
-    }
-    originalError(...args);
+  const suppressWarnings = (originalFn: any) => {
+    return (...args: any[]) => {
+      const msg = args.join(" ");
+      if (
+        msg.includes("Can't perform a React state update") ||
+        msg.includes("Encountered a script tag while rendering React component")
+      ) {
+        return;
+      }
+      originalFn(...args);
+    };
   };
+  console.error = suppressWarnings(console.error);
+  console.warn = suppressWarnings(console.warn);
 }
 
 export const metadata: Metadata = {

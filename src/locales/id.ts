@@ -43,7 +43,63 @@ export const id: Dictionary = {
     description: "Kumpulan karya terbaru saya di bidang Fullstack Development dan Quality Assurance. Geser atau seret untuk menjelajahi proyek dalam ruang 3D.",
     dragHint: "← Geser untuk memutar galeri, Klik untuk melihat detail →",
     viewRepo: "Lihat Repositori",
-    technologies: "Teknologi"
+    technologies: "Teknologi",
+    items: [
+      {
+        id: 1,
+        title: "E-Commerce",
+        desc: "Next.js & Stripe",
+        image: "/projects/1.jpg",
+        github: "https://github.com/",
+        longDesc: "Platform e-commerce full-stack berkinerja tinggi yang dirancang untuk ritel modern. Dilengkapi dengan etalase toko yang responsif, alur pembayaran yang aman melalui Stripe, serta dasbor kustom untuk manajemen inventaris.",
+        tags: ["Next.js", "Stripe", "Tailwind CSS", "TypeScript"]
+      },
+      {
+        id: 2,
+        title: "QA Manual & Automation",
+        desc: "Playwright, Cypress & Katalon",
+        image: "/projects/2.jpg",
+        github: "https://github.com/",
+        longDesc: "Rangkaian penjaminan mutu (QA) komprehensif yang mencakup metodologi pengujian manual dan jalur pengujian E2E terotomatisasi. Dirancang untuk memastikan setiap peluncuran aplikasi web yang kompleks berjalan tanpa cacat (zero-defect).",
+        tags: ["Playwright", "Cypress", "Katalon", "E2E Testing"]
+      },
+      {
+        id: 3,
+        title: "CMS OpenTrip",
+        desc: "Next.js & Postgresql",
+        image: "/projects/CMS OpenTrip.png",
+        github: "https://github.com/",
+        longDesc: "Sistem Manajemen Konten (CMS) kustom yang dirancang khusus untuk platform OpenTrip. Memungkinkan para admin untuk mengelola paket tur, pemesanan, hak akses pengguna, serta laporan keuangan dengan mulus dan terpusat.",
+        tags: ["Next.js", "PostgreSQL", "Prisma", "Admin Panel"]
+      },
+      {
+        id: 4,
+        title: "OpenTrip",
+        desc: "Next.js & Express",
+        image: "/projects/OpenTrip.png",
+        github: "https://github.com/",
+        longDesc: "Portal utama bagi pelanggan untuk memesan pengalaman perjalanan. Ditenagai oleh frontend Next.js yang tangguh dan backend API Express, menawarkan pengecekan ketersediaan tur secara real-time dan sistem otentikasi pengguna yang aman.",
+        tags: ["Next.js", "Express.js", "REST API", "Node.js"]
+      },
+      {
+        id: 5,
+        title: "Kilau Kebaya",
+        desc: "Next.js, Laravel, & Postgresql",
+        image: "/projects/KilauKebaya.png",
+        github: "https://github.com/",
+        longDesc: "Aplikasi web yang elegan dan modern untuk butik kebaya premium. Mengintegrasikan etalase Next.js yang menawan dengan backend API Laravel yang solid untuk menangani variasi produk dan pesanan yang kompleks.",
+        tags: ["Next.js", "Laravel", "PostgreSQL", "E-Commerce"]
+      },
+      {
+        id: 6,
+        title: "Coffeshop",
+        desc: "Next.js & TailwindCSS",
+        image: "/projects/6.jpg",
+        github: "https://github.com/akagami007/kopi-kita.git",
+        longDesc: "Halaman pendaratan (landing page) dan menu digital yang memanjakan mata untuk kedai kopi lokal. Menampilkan desain pixel-perfect, animasi mikro yang mulus, dan dibangun murni dengan Next.js serta Tailwind CSS demi performa maksimal.",
+        tags: ["Next.js", "Tailwind CSS", "Framer Motion", "UI/UX"]
+      }
+    ]
   },
   socials: {
     title: "Mari Terhubung",

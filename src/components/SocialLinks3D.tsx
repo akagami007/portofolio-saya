@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Text, RoundedBox, Environment, ContactShadows, useCursor } from "@react-three/drei";
 import * as THREE from "three";
@@ -113,31 +113,33 @@ export default function SocialLinks3D() {
   return (
     <div className="w-full h-[400px] relative">
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} intensity={1.5} color="#ffffff" />
-        <pointLight position={[-10, -10, 10]} intensity={1} color="#00ffff" />
-        <pointLight position={[10, -10, 10]} intensity={1} color="#ff00ff" />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 10]} intensity={1.5} color="#ffffff" />
+          <pointLight position={[-10, -10, 10]} intensity={1} color="#00ffff" />
+          <pointLight position={[10, -10, 10]} intensity={1} color="#ff00ff" />
 
-        <Environment preset="city" />
+          <Environment preset="city" />
 
-        {socialsData.map((social, index) => (
-          <SocialIcon
-            key={social.id}
-            data={social}
-            index={index}
-            position={[startX + index * spacing, 0, 0]}
+          {socialsData.map((social, index) => (
+            <SocialIcon
+              key={social.id}
+              data={social}
+              index={index}
+              position={[startX + index * spacing, 0, 0]}
+            />
+          ))}
+
+          {/* Shadow plane at the bottom */}
+          <ContactShadows
+            position={[0, -2.5, 0]}
+            opacity={0.4}
+            scale={20}
+            blur={2}
+            far={4}
+            color="#000000"
           />
-        ))}
-
-        {/* Shadow plane at the bottom */}
-        <ContactShadows
-          position={[0, -2.5, 0]}
-          opacity={0.4}
-          scale={20}
-          blur={2}
-          far={4}
-          color="#000000"
-        />
+        </Suspense>
       </Canvas>
     </div>
   );

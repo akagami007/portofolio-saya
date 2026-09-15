@@ -41,7 +41,63 @@ export const en = {
     description: "A showcase of my recent work across Fullstack Development and Quality Assurance. Swipe or drag to explore the projects in 3D space.",
     dragHint: "← Drag to rotate gallery, Click to view details →",
     viewRepo: "View Repository",
-    technologies: "Technologies"
+    technologies: "Technologies",
+    items: [
+      {
+        id: 1,
+        title: "E-Commerce",
+        desc: "Next.js & Stripe",
+        image: "/projects/1.jpg",
+        github: "https://github.com/",
+        longDesc: "A high-performance full-stack e-commerce platform designed for modern retail. Features a responsive storefront, secure checkout flow via Stripe, and a custom dashboard for inventory management.",
+        tags: ["Next.js", "Stripe", "Tailwind CSS", "TypeScript"]
+      },
+      {
+        id: 2,
+        title: "QA Manual & Automation",
+        desc: "Playwright, Cypress & Katalon",
+        image: "/projects/2.jpg",
+        github: "https://github.com/",
+        longDesc: "A comprehensive quality assurance suite encompassing both manual testing methodologies and automated E2E testing pipelines. Designed to ensure zero-defect releases across complex web applications.",
+        tags: ["Playwright", "Cypress", "Katalon", "E2E Testing"]
+      },
+      {
+        id: 3,
+        title: "CMS OpenTrip",
+        desc: "Next.js & Postgresql",
+        image: "/projects/CMS OpenTrip.png",
+        github: "https://github.com/",
+        longDesc: "A custom Content Management System tailored specifically for the OpenTrip platform. It empowers administrators to seamlessly manage tour packages, bookings, user roles, and financial reports.",
+        tags: ["Next.js", "PostgreSQL", "Prisma", "Admin Panel"]
+      },
+      {
+        id: 4,
+        title: "OpenTrip",
+        desc: "Next.js & Express",
+        image: "/projects/OpenTrip.png",
+        github: "https://github.com/",
+        longDesc: "The main customer-facing portal for booking travel experiences. Powered by a robust Next.js frontend and an Express backend API, offering real-time tour availability and secure user authentication.",
+        tags: ["Next.js", "Express.js", "REST API", "Node.js"]
+      },
+      {
+        id: 5,
+        title: "Kilau Kebaya",
+        desc: "Next.js, Laravel, & Postgresql",
+        image: "/projects/KilauKebaya.png",
+        github: "https://github.com/",
+        longDesc: "An elegant and modern web application for a premium kebaya boutique. Integrates a beautiful Next.js storefront with a solid Laravel backend API to handle complex product variations and orders.",
+        tags: ["Next.js", "Laravel", "PostgreSQL", "E-Commerce"]
+      },
+      {
+        id: 6,
+        title: "Coffeshop",
+        desc: "Next.js & TailwindCSS",
+        image: "/projects/6.jpg",
+        github: "https://github.com/akagami007/kopi-kita.git",
+        longDesc: "A visually striking landing page and digital menu for a local coffeeshop. Features a pixel-perfect design, smooth micro-animations, and is built purely with Next.js and Tailwind CSS for maximum performance.",
+        tags: ["Next.js", "Tailwind CSS", "Framer Motion", "UI/UX"]
+      }
+    ]
   },
   socials: {
     title: "Connect With Me",
