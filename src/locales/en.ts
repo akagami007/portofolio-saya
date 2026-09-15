@@ -16,6 +16,26 @@ export const en = {
     backend: "Backend (Node.js, SQL, APIs)",
     qa: "QA & E2E Testing (Playwright, Cypress)"
   },
+  experience: {
+    title: "Work Experience",
+    description: "A chronological journey of my professional career.",
+    items: [
+      {
+        id: 1,
+        role: "Quality Assurance Tester",
+        company: "PT Infosys Solusi Terpadu",
+        period: "Apr 2022 - Present",
+        description: "Spearheaded comprehensive end-to-end testing strategies for high-impact mobile and web applications. Engineered meticulous test scenarios and structured testing documentation to ensure bulletproof software releases, drastically reducing post-deployment bugs and elevating overall user satisfaction."
+      },
+      {
+        id: 2,
+        role: "Pega Developer",
+        company: "PT Asuransi Sinar Mas",
+        period: "Feb 2021 - Feb 2022",
+        description: "Designed and implemented robust enterprise-scale workflow solutions using the Pega platform. Streamlined complex business rules into seamless automated processes, accelerating internal operational efficiency and ensuring secure, highly-available insurance architectures."
+      }
+    ]
+  },
   projects: {
     title: "Project Gallery",
     description: "A showcase of my recent work across Fullstack Development and Quality Assurance. Swipe or drag to explore the projects in 3D space.",

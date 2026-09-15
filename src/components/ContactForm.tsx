@@ -26,6 +26,7 @@ export default function ContactForm() {
   useEffect(() => {
     // Initial greeting
     if (messages.length === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsTyping(true);
       const timer = setTimeout(() => {
         setMessages([{ id: "1", sender: "bot", text: t.chat.step1 }]);

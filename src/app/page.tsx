@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import ContactForm from "@/components/ContactForm";
 import { useLanguage } from "@/context/LanguageContext";
 
+import Experience from "@/components/Experience";
+
 // Lazy-load heavy 3D components to avoid blocking the initial HTML payload (improves Web Vitals LCP/FCP)
 const Hero3D = dynamic(() => import("@/components/Hero3D"), { ssr: false });
 const ProjectCarousel3D = dynamic(() => import("@/components/ProjectCarousel3D"), { ssr: false });
@@ -86,6 +88,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Experience Section */}
+      <Experience />
 
       {/* Case Studies Section */}
       <section id="case-studies" className="w-full bg-gray-100 dark:bg-black/50 py-24 overflow-hidden transition-colors border-y border-gray-200 dark:border-transparent">

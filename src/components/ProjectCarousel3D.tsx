@@ -172,6 +172,7 @@ export default function ProjectCarousel3D() {
   const { t } = useLanguage();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

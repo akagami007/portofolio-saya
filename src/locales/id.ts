@@ -18,6 +18,26 @@ export const id: Dictionary = {
     backend: "Backend (Node.js, SQL, APIs)",
     qa: "QA & E2E Testing (Playwright, Cypress)"
   },
+  experience: {
+    title: "Pengalaman Kerja",
+    description: "Perjalanan karier profesional saya dari waktu ke waktu.",
+    items: [
+      {
+        id: 1,
+        role: "Quality Assurance Tester",
+        company: "PT Infosys Solusi Terpadu",
+        period: "Apr 2022 - Sekarang",
+        description: "Memimpin strategi pengujian hulu ke hilir (End-to-End) untuk aplikasi mobile dan web berkinerja tinggi. Merancang skenario pengujian yang sangat teliti dan menyusun dokumen hasil uji terstruktur guna memastikan setiap perilisan perangkat lunak bebas dari celah, menurunkan tingkat bug pasca-rilis secara drastis, serta mengamankan pengalaman pengguna yang memuaskan."
+      },
+      {
+        id: 2,
+        role: "Pega Developer",
+        company: "PT Asuransi Sinar Mas",
+        period: "Feb 2021 - Feb 2022",
+        description: "Merancang dan membangun solusi alur kerja berskala Enterprise menggunakan platform Pega. Mengubah logika dan aturan bisnis yang rumit menjadi sistem terotomatisasi yang elegan, mempercepat efisiensi operasional internal, serta memastikan arsitektur asuransi berjalan aman dan stabil tanpa henti."
+      }
+    ]
+  },
   projects: {
     title: "Galeri Proyek",
     description: "Kumpulan karya terbaru saya di bidang Fullstack Development dan Quality Assurance. Geser atau seret untuk menjelajahi proyek dalam ruang 3D.",
