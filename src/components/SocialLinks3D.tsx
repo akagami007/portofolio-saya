@@ -91,7 +91,6 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
           }}
           onClick={handleClick}
         >
-          {/* 3D Coin/Box shape for the icon */}
           <RoundedBox args={[2, 2, 0.4]} radius={0.4} smoothness={4}>
             <meshPhysicalMaterial
               ref={materialRef}
@@ -105,7 +104,6 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
             />
           </RoundedBox>
 
-          {/* Symbol Text */}
           <Text
             ref={symbolTextRef}
             position={[0, 0, 0.21]}
@@ -120,7 +118,6 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
             {data.symbol}
           </Text>
 
-          {/* Label Text below the icon */}
           <Text
             ref={labelTextRef}
             position={[0, -1.6, 0]}

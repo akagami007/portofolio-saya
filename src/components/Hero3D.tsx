@@ -19,12 +19,10 @@ export default function Hero3D() {
 
           <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
             <group>
-              {/* Outer Architecture / Network Wireframe */}
               <Icosahedron args={[2, 1]}>
                 <meshStandardMaterial color="#00ffff" wireframe transparent opacity={0.3} />
               </Icosahedron>
               
-              {/* Inner Core (Logic/Database) */}
               <Icosahedron args={[1.2, 1]}>
                 <meshPhysicalMaterial 
                   color="#1e3a8a"
@@ -36,7 +34,6 @@ export default function Hero3D() {
                 />
               </Icosahedron>
 
-              {/* Floating Code Symbols */}
               <Float speed={2.5} rotationIntensity={0.5} floatIntensity={1.5} position={[-2.5, 1, 1]}>
                 <Text fontSize={0.7} color="#4ade80" fontWeight="bold">{'</>'}</Text>
               </Float>
@@ -47,7 +44,6 @@ export default function Hero3D() {
                 <Text fontSize={0.6} color="#a855f7" fontWeight="bold">{'[ ]'}</Text>
               </Float>
 
-              {/* Orbiting Data Modules */}
               <Float speed={4} rotationIntensity={2} floatIntensity={1} position={[1.8, 1.5, -1]}>
                 <Box args={[0.4, 0.4, 0.4]}>
                   <meshStandardMaterial color="#00ffff" wireframe />

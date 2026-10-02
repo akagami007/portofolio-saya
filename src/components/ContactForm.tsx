@@ -17,21 +17,24 @@ export default function ContactForm() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   
-  // Data collection
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const botRespond = (text: string, nextStep?: 0 | 1 | 2 | 3 | 4, delay = 1000) => {
+    setIsTyping(true);
+    const timer = setTimeout(() => {
+      setMessages((prev) => [...prev, { id: Date.now().toString(), sender: "bot", text }]);
+      if (nextStep !== undefined) setStep(nextStep);
+      setIsTyping(false);
+    }, delay);
+    return timer;
+  };
+
   useEffect(() => {
-    // Initial greeting
     if (messages.length === 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsTyping(true);
-      const timer = setTimeout(() => {
-        setMessages([{ id: "1", sender: "bot", text: t.chat.step1 }]);
-        setIsTyping(false);
-      }, 1000);
+      const timer = botRespond(t.chat.step1, 0, 1000);
       return () => clearTimeout(timer);
     }
   }, [messages.length, t.chat.step1]);
@@ -44,93 +47,48 @@ export default function ContactForm() {
 
   const handleSend = async (quickReplyText?: string | React.MouseEvent) => {
     const isQuickReply = typeof quickReplyText === 'string';
-    const textToSend = isQuickReply ? quickReplyText as string : inputValue;
-    
-    if (!textToSend.trim()) return;
-
+    const textToSend = isQuickReply ? (quickReplyText as string) : inputValue;
     const userText = textToSend.trim();
+    
+    if (!userText) return;
     if (!isQuickReply) setInputValue("");
     
-    // Add user message
     setMessages((prev) => [...prev, { id: Date.now().toString(), sender: "user", text: userText }]);
-    setIsTyping(true);
-
+    
     if (step === 0) {
       setName(userText);
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev, 
-          { id: Date.now().toString(), sender: "bot", text: t.chat.step2.replace("{name}", userText) }
-        ]);
-        setStep(1);
-        setIsTyping(false);
-      }, 1000);
+      botRespond(t.chat.step2.replace("{name}", userText), 1);
     } 
     else if (step === 1) {
-      // Validate email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(userText)) {
-        setTimeout(() => {
-          setMessages((prev) => [
-            ...prev, 
-            { id: Date.now().toString(), sender: "bot", text: t.chat.invalidEmail }
-          ]);
-          setIsTyping(false);
-        }, 800);
+        botRespond(t.chat.invalidEmail, undefined, 800);
         return;
       }
-      
       setEmail(userText);
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev, 
-          { id: Date.now().toString(), sender: "bot", text: t.chat.step3 }
-        ]);
-        setStep(2);
-        setIsTyping(false);
-      }, 1000);
+      botRespond(t.chat.step3, 2);
     }
     else if (step === 2) {
-      setStep(3);
+      setStep(3); // typing state for processing
       
-      setTimeout(async () => {
-        setMessages((prev) => [
-          ...prev, 
-          { id: Date.now().toString(), sender: "bot", text: t.chat.step4 }
-        ]);
+      setTimeout(() => {
+        setMessages((prev) => [...prev, { id: Date.now().toString(), sender: "bot", text: t.chat.step4 }]);
         
         try {
-          // Optional: Still save to database just in case
           fetch("/api/contact", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, message: userText }),
-          }).catch(() => {}); // Ignore API errors to ensure WA always opens
+          }).catch((err) => {
+            console.error("Failed to save message to database:", err);
+          });
 
-          const waNumber = "6282323572250";
-          const waMessage = `Halo Stefan,\n\nNama saya: ${name}\nEmail: ${email}\n\nPesan:\n${userText}`;
-          const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+          const waUrl = `https://wa.me/6282323572250?text=${encodeURIComponent(`Halo Stefan,\n\nNama saya: ${name}\nEmail: ${email}\n\nPesan:\n${userText}`)}`;
 
-          setTimeout(() => {
-            setMessages((prev) => [
-              ...prev, 
-              { id: Date.now().toString(), sender: "bot", text: t.chat.success }
-            ]);
-            setStep(4);
-            setIsTyping(false);
-            
-            // Open WhatsApp in new tab
-            window.open(waUrl, '_blank', 'noopener,noreferrer');
-          }, 1500);
-        } catch (error) {
-          setTimeout(() => {
-            setMessages((prev) => [
-              ...prev, 
-              { id: Date.now().toString(), sender: "bot", text: t.chat.error }
-            ]);
-            setStep(2);
-            setIsTyping(false);
-          }, 1000);
+          botRespond(t.chat.success, 4, 1500);
+          setTimeout(() => window.open(waUrl, '_blank', 'noopener,noreferrer'), 1500);
+        } catch {
+          botRespond(t.chat.error, 2, 1000);
         }
       }, 1000);
     }
@@ -149,7 +107,6 @@ export default function ContactForm() {
 
   return (
     <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm dark:shadow-none transition-colors max-w-2xl mx-auto flex flex-col h-[550px]">
-      {/* Chat Header */}
       <div className="bg-gray-50 dark:bg-black/50 border-b border-gray-200 dark:border-white/10 p-4 flex items-center gap-4">
         <div className="relative">
           <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-md">
@@ -163,7 +120,6 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Chat Messages */}
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth">
         <div className="text-center pb-4">
           <span className="text-xs text-gray-400 font-medium px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full">
@@ -194,7 +150,6 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Chat Input */}
       <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/30">
         {step >= 4 ? (
           <div className="flex flex-col items-center justify-center space-y-2 py-2">

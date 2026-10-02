@@ -11,11 +11,8 @@ const contactSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
-    // Validate request body
     const validatedData = contactSchema.parse(body);
 
-    // Check if database is configured (for local development)
     if (!process.env.DATABASE_URL) {
       console.warn("⚠️ DATABASE_URL is missing. Skipping database save for local development. Message will still be sent to WhatsApp.");
       return NextResponse.json(
@@ -24,7 +21,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Save to database using Prisma (when deployed to Vercel)
     const message = await prisma.message.create({
       data: validatedData,
     });

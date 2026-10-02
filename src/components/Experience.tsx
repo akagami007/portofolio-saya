@@ -56,12 +56,10 @@ export default function Experience() {
             variants={itemVariants}
             className="mb-12 ml-8 relative"
           >
-            {/* Timeline Dot */}
             <div className="absolute -left-[43px] bg-white dark:bg-[#050505] p-1.5 rounded-full border-2 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)] z-10 transition-colors">
               <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
 
-            {/* Experience Card */}
             <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md dark:hover:shadow-[0_4px_30px_rgba(59,130,246,0.1)] transition-all duration-300">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
                 <div>

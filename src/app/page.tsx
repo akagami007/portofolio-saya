@@ -16,8 +16,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      
-      {/* Hero Section */}
       <section id="hero" className="w-full relative min-h-screen flex flex-col justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Hero3D />
@@ -45,7 +43,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About & Skills Section */}
       <section id="about" className="w-full max-w-6xl mx-auto px-4 py-24">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -89,10 +86,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
       <Experience />
 
-      {/* Case Studies Section */}
       <section id="case-studies" className="w-full bg-gray-100 dark:bg-black/50 py-24 overflow-hidden transition-colors border-y border-gray-200 dark:border-transparent">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white transition-colors">{t.projects.title}</h2>
@@ -100,7 +95,6 @@ export default function Home() {
             {t.projects.description}
           </p>
           
-          {/* 3D Carousel Display */}
           <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 bg-white dark:bg-black/30 shadow-md dark:shadow-none backdrop-blur-sm transition-colors">
             <ProjectCarousel3D />
           </div>
@@ -108,7 +102,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Links 3D Section */}
       <section id="socials" className="w-full py-16 bg-gray-50 dark:bg-black/40 border-t border-gray-200 dark:border-white/5 transition-colors">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
@@ -121,7 +114,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="w-full max-w-3xl mx-auto px-4 py-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white transition-colors">{t.contact.title}</h2>
@@ -133,7 +125,6 @@ export default function Home() {
         <ContactForm />
       </section>
       
-      {/* Footer */}
       <footer className="w-full border-t border-gray-200 dark:border-white/10 py-8 text-center text-gray-500 text-sm bg-white dark:bg-transparent transition-colors">
         <p>&copy; {new Date().getFullYear()} Stefan Cornelius. {t.footer.rights}</p>
         <p className="mt-2">{t.footer.builtWith}</p>
