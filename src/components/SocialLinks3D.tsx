@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, Suspense } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Text, RoundedBox, Environment, ContactShadows, useCursor } from "@react-three/drei";
+import { Float, Text, RoundedBox, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 
 import { socialsData, type SocialData } from "@/lib/socials";
@@ -15,16 +15,16 @@ interface SocialIconProps {
 
 function SocialIcon({ position, data, index }: SocialIconProps) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [hovered, setHovered] = useState(false);
-  
-  // Clean, declarative cursor management
-  // Source: https://github.com/pmndrs/drei#usecursor
-  useCursor(hovered, 'pointer', 'auto');
+  const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
+  const symbolTextRef = useRef<any>(null);
+  const labelTextRef = useRef<any>(null);
+  const isHoveredRef = useRef(false);
 
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
     const t = state.clock.getElapsedTime();
+    const hovered = isHoveredRef.current;
 
     const targetRotationY = hovered ? Math.sin(t * 2) * 0.2 : Math.sin(t * 0.5 + index) * 0.3;
     const targetRotationX = hovered ? -0.1 : Math.cos(t * 0.3 + index) * 0.2;
@@ -34,6 +34,7 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
     // 5.0 and 8.0 are the spring lambda values (speed of damping)
     const lerpFactorRot = 1 - Math.exp(-5.0 * delta);
     const lerpFactorScale = 1 - Math.exp(-8.0 * delta);
+    const lerpFactorColor = 1 - Math.exp(-10.0 * delta);
 
     meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, lerpFactorRot);
     meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, lerpFactorRot);
@@ -41,6 +42,32 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
     const currentScale = meshRef.current.scale.x;
     const newScale = THREE.MathUtils.lerp(currentScale, targetScale, lerpFactorScale);
     meshRef.current.scale.set(newScale, newScale, newScale);
+
+    if (materialRef.current) {
+      const targetColor = new THREE.Color(hovered ? data.color : "#222222");
+      materialRef.current.color.lerp(targetColor, lerpFactorColor);
+      
+      const targetEmissive = new THREE.Color(hovered ? data.emissive : "#000000");
+      materialRef.current.emissive.lerp(targetEmissive, lerpFactorColor);
+      
+      materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(
+        materialRef.current.emissiveIntensity,
+        hovered ? 0.5 : 0,
+        lerpFactorColor
+      );
+    }
+
+    if (symbolTextRef.current) {
+      symbolTextRef.current.outlineWidth = THREE.MathUtils.lerp(
+        symbolTextRef.current.outlineWidth || 0.02,
+        hovered ? 0 : 0.02,
+        lerpFactorColor
+      );
+    }
+
+    if (labelTextRef.current) {
+      labelTextRef.current.color = hovered ? "#ffffff" : "#888888";
+    }
   });
 
   const handleClick = () => {
@@ -54,20 +81,23 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
           ref={meshRef}
           onPointerOver={(e) => {
             e.stopPropagation();
-            setHovered(true);
+            isHoveredRef.current = true;
+            document.body.style.cursor = 'pointer';
           }}
           onPointerOut={(e) => {
             e.stopPropagation();
-            setHovered(false);
+            isHoveredRef.current = false;
+            document.body.style.cursor = 'auto';
           }}
           onClick={handleClick}
         >
           {/* 3D Coin/Box shape for the icon */}
           <RoundedBox args={[2, 2, 0.4]} radius={0.4} smoothness={4}>
             <meshPhysicalMaterial
-              color={hovered ? data.color : "#222222"}
-              emissive={hovered ? data.emissive : "#000000"}
-              emissiveIntensity={hovered ? 0.5 : 0}
+              ref={materialRef}
+              color="#222222"
+              emissive="#000000"
+              emissiveIntensity={0}
               roughness={0.1}
               metalness={0.8}
               clearcoat={1}
@@ -77,13 +107,14 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
 
           {/* Symbol Text */}
           <Text
+            ref={symbolTextRef}
             position={[0, 0, 0.21]}
             fontSize={0.8}
             font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff"
             color="white"
             anchorX="center"
             anchorY="middle"
-            outlineWidth={hovered ? 0 : 0.02}
+            outlineWidth={0.02}
             outlineColor="#000000"
           >
             {data.symbol}
@@ -91,9 +122,10 @@ function SocialIcon({ position, data, index }: SocialIconProps) {
 
           {/* Label Text below the icon */}
           <Text
+            ref={labelTextRef}
             position={[0, -1.6, 0]}
             fontSize={0.3}
-            color={hovered ? "white" : "#888888"}
+            color="#888888"
             anchorX="center"
             anchorY="middle"
           >

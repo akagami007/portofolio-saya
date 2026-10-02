@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, Suspense } from "react";
 import { createPortal } from "react-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, OrbitControls, Image, useCursor } from "@react-three/drei";
+import { Text, OrbitControls, Image } from "@react-three/drei";
 import * as THREE from "three";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -34,12 +34,8 @@ function Carousel({ onSelect }: { onSelect: (project: Project) => void }) {
   const { t } = useLanguage();
   const projectsData = (t.projects?.items || []) as Project[];
   const groupRef = useRef<THREE.Group>(null);
-  const [hovered, setHovered] = useState(false);
   const isHoveredRef = useRef(false);
   const radius = 3.5;
-
-  // Use drei's declarative cursor management
-  useCursor(hovered, 'pointer', 'auto');
 
   useFrame((state, delta) => {
     if (groupRef.current && !isHoveredRef.current) {
@@ -62,13 +58,13 @@ function Carousel({ onSelect }: { onSelect: (project: Project) => void }) {
             rotation={[0, angle, 0]}
             onPointerOver={(e) => {
               e.stopPropagation();
-              setHovered(true);
               isHoveredRef.current = true;
+              document.body.style.cursor = 'pointer';
             }}
             onPointerOut={(e) => {
               e.stopPropagation();
-              setHovered(false);
               isHoveredRef.current = false;
+              document.body.style.cursor = 'auto';
             }}
             onClick={(e) => {
               e.stopPropagation();
