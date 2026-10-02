@@ -56,7 +56,7 @@ export default function Experience() {
             variants={itemVariants}
             className="mb-12 ml-8 relative"
           >
-            <div className="absolute -left-[43px] bg-white dark:bg-[#050505] p-1.5 rounded-full border-2 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)] z-10 transition-colors">
+            <div className="absolute -left-[43px] bg-white dark:bg-[#050505] p-1.5 rounded-full border-2 border-blue-500 z-10 transition-colors">
               <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
 

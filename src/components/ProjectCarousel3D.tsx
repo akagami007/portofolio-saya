@@ -128,7 +128,6 @@ function ProjectModal({ project, onClose, t }: { project: Project; onClose: () =
 
         <div className="p-8 pt-12">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
             <span className="text-blue-600 dark:text-blue-400 text-sm font-semibold tracking-wider uppercase transition-colors">{project.desc}</span>
           </div>
 

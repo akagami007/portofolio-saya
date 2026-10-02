@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import ContactForm from "@/components/ContactForm";
 import { useLanguage } from "@/context/LanguageContext";
+import LiveDashboard from "@/components/LiveDashboard";
 
 import Experience from "@/components/Experience";
 
@@ -84,6 +85,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
+        <LiveDashboard />
       </section>
 
       <Experience />
