@@ -21,23 +21,23 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <Hero3D />
         </div>
-        
+
         <div className="z-10 flex flex-col items-center justify-center h-full text-center px-4 mt-20 pointer-events-none">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 drop-shadow-lg text-gray-900 dark:text-white transition-colors">
-            {t.hero.greeting} <span className="text-blue-600 dark:text-blue-500">{t.hero.name}</span>
+            {t.hero.greeting} <span className="text-blue-700 dark:text-blue-500">{t.hero.name}</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl drop-shadow-md transition-colors">
+          <p className="text-xl md:text-2xl text-green-600 dark:text-gray-200 max-w-2xl drop-shadow-md transition-colors font-medium">
             {t.hero.role}
           </p>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto transition-colors">
+          <p className="mt-4 text-green-600 dark:text-gray-400 max-w-xl mx-auto drop-shadow-md transition-colors font-medium">
             {t.hero.description}
           </p>
-          
-          <div className="mt-8 flex gap-4 pointer-events-auto">
-            <a href="#case-studies" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors shadow-md">
+
+          <div className="mt-8 flex justify-center gap-4 pointer-events-auto">
+            <a href="#case-studies" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors shadow-md">
               {t.hero.viewWork}
             </a>
-            <a href="#contact" className="px-6 py-3 bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white font-medium rounded-lg backdrop-blur-sm transition-colors border border-gray-300 dark:border-white/10 shadow-sm">
+            <a href="#contact" className="px-6 py-3 bg-white/90 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white font-medium rounded-xl transition-colors border border-gray-300 dark:border-white/10 shadow-sm">
               {t.hero.hireMe}
             </a>
           </div>
@@ -85,7 +85,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         <LiveDashboard />
       </section>
 
@@ -97,7 +97,7 @@ export default function Home() {
           <p className="text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto mb-12 transition-colors">
             {t.projects.description}
           </p>
-          
+
           <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 bg-white dark:bg-black/30 shadow-md dark:shadow-none backdrop-blur-sm transition-colors">
             <ProjectCarousel3D />
           </div>
@@ -124,10 +124,10 @@ export default function Home() {
             {t.contact.description}
           </p>
         </div>
-        
+
         <ContactForm />
       </section>
-      
+
       <footer className="w-full border-t border-gray-200 dark:border-white/10 py-8 text-center text-gray-500 text-sm bg-white dark:bg-transparent transition-colors">
         <p>&copy; {new Date().getFullYear()} Stefan Cornelius. {t.footer.rights}</p>
         <p className="mt-2">{t.footer.builtWith}</p>

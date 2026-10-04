@@ -38,8 +38,11 @@ export default function LiveDashboard() {
 
   return (
     <div className="w-full mt-12 bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden group">
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 -z-10"></div>
+      
       <div className="flex items-center gap-3 mb-8">
         <div className="relative flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
         </div>
         <h3 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
