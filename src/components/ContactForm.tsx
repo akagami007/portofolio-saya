@@ -122,7 +122,7 @@ export default function ContactForm() {
 
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth">
         <div className="text-center pb-4">
-          <span className="text-xs text-gray-400 font-medium px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full">
+          <span suppressHydrationWarning className="text-xs text-gray-400 font-medium px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full">
             Today, {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </span>
         </div>
